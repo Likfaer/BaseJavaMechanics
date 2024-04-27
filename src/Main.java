@@ -1,4 +1,6 @@
 import java.text.DecimalFormat; // Формат вывода данных (округление)
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +11,9 @@ public class Main {
         System.out.println("Вызов метода OopMechanics"); // Принципы ООП на Java
         OopMechanics();
         System.out.println("==OopMechanics end==");
+        System.out.println("Вызов метода StructuresAndAlgorithms"); // Принципы ООП на Java
+        StructuresAndAlgorithms();
+        System.out.println("==StructuresAndAlgorithms end==");
     }
     public static void BaseMechanics() {
         System.out.print("Вывод на ");
@@ -48,10 +53,27 @@ public class Main {
         zooKeeperSecond.feedAnimal(snake);
         snake.makeSound();
     }
-    //Инкапсуляция: Скрыть детали реализации классов животных и сотрудников зоопарка.
-    //Наследование: Использовать общие свойства и методы животных и сотрудников.
-    //Полиморфизм: Позволить разным типам животных выполнять действия, такие как издавать звуки, специфичные для их видов.
-    //Абстракция: Определить абстрактные классы или интерфейсы для обобщения функций животных и сотрудников.
-    //Ассоциация: Связать животных с сотрудниками, которые за ними ухаживают.
+    public static void StructuresAndAlgorithms() {
+        Random random = new Random();
+        ArrayList<Double> list = new ArrayList<>(); // Динамический массив (список)
+        for (int i = 0; i < 10; i++) {
+            list.add(random.nextDouble() * 100);
+        }
+        SortingAlgorithms.printList(list); // Вывод до сотых (без округления)
+        SortingAlgorithms.quickSort(list, 0, list.size() - 1); // Быстрая сортировка
+        SortingAlgorithms.printList(list);
+
+        int resultIndex = SortingAlgorithms.findFirstAbove(list, 50);
+        if (resultIndex != -1) {
+            System.out.println("Первый элемент больше 50 находится на индексе: " + resultIndex);
+            System.out.println("Значение элемента: " + list.get(resultIndex));
+            System.out.println("Все элементы больше 50: ");
+            for (int i = resultIndex; i < list.size(); i++) {
+                System.out.print(list.get(i) + " ");
+            }
+        } else {
+            System.out.println("Элементы больше 50 не найдены.");
+        }
+    }
 }
 
