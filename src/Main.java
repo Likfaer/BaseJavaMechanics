@@ -1,6 +1,8 @@
+import java.io.PrintStream;
 import java.text.DecimalFormat; // Формат вывода данных (округление)
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +16,9 @@ public class Main {
         System.out.println("Вызов метода StructuresAndAlgorithms"); // Принципы ООП на Java
         StructuresAndAlgorithms();
         System.out.println("==StructuresAndAlgorithms end==");
+        System.out.println("Вызов метода SimpleQueue"); // Принципы ООП на Java
+        SimpleQueue();
+        System.out.println("==SimpleQueue end==");
     }
     public static void BaseMechanics() {
         System.out.print("Вывод на ");
@@ -63,17 +68,41 @@ public class Main {
         SortingAlgorithms.quickSort(list, 0, list.size() - 1); // Быстрая сортировка
         SortingAlgorithms.printList(list);
 
-        int resultIndex = SortingAlgorithms.findFirstAbove(list, 50);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите любое число, выше которого выведутся элементы списка:");
+        double markedNumber = scanner.nextDouble();
+        int resultIndex = SortingAlgorithms.findFirstAbove(list, markedNumber); // бинарный поиск элементов больше определённого числа
         if (resultIndex != -1) {
-            System.out.println("Первый элемент больше 50 находится на индексе: " + resultIndex);
+            System.out.println("Первый элемент больше " + markedNumber + " находится на индексе: " + resultIndex);
             System.out.println("Значение элемента: " + list.get(resultIndex));
-            System.out.println("Все элементы больше 50: ");
+            System.out.println("Все элементы больше " + markedNumber + ": ");
             for (int i = resultIndex; i < list.size(); i++) {
-                System.out.print(list.get(i) + " ");
+                PrintStream printf = System.out.printf("%.2f ", list.get(i));
             }
+            System.out.println();
         } else {
-            System.out.println("Элементы больше 50 не найдены.");
+            System.out.println("Элементы больше " + markedNumber + " не найдены.");
+        }
+
+        System.out.println("Введите колличество чисел Фибоначчи, которое будет выведено:"); //Простейшая рекурсия (числа Фибоначчи)
+        double numberFibonacci = scanner.nextInt();
+        scanner.close();
+        System.out.println("Первые " + numberFibonacci + " чисел Фибоначчи:");
+        for (int i = 0; i < numberFibonacci; i++) {
+            System.out.print(SortingAlgorithms.fibonacci(i) + " ");
         }
     }
+    public static void SimpleQueue() {
+        Queue queue = new Queue();
+        queue.enqueue(new Person("Владимир", 25));
+        queue.enqueue(new Person("Алексей", 30));
+        queue.enqueue(new Person("Дмитрий", 20));
+
+        System.out.println("Размер очереди: " + queue.size());
+        System.out.println("Первый в очереди: " + queue.peek());
+        Person removedPerson = queue.dequeue();
+        System.out.println("Вышел из очереди: " + removedPerson);
+        System.out.println("Размер очереди после выхода: " + queue.size());
+     }
 }
 
